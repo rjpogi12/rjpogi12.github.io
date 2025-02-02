@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffdde1;
+            padding: 50px;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        #message {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .yes-btn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        .yes-btn:hover {
+            background-color: #ff1e4d;
+        }
+
+        .no-btn {
+            background-color: #aaa;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            animation: floatUp 2s ease-in-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
+
+        #finalImage {
+            display: none;
+            margin-top: 20px;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        #finalMessage {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will You Be My Valentine? ❤️</h1>
+    <p>I promise to make this the best Valentine's Day ever!</p>
+    <p id="message"></p>  
+    <div class="button-container" id="buttons">
+        <button class="btn yes-btn" id="yesButton">Yes! ❤️</button>
+        <button class="btn no-btn" id="noButton">No ❌</button>
+    </div>
+
+    <img id="finalImage" src=""https://i.imgur.com/xMKyMEn.jpg"" alt="Happy Image">
+    <p id="finalMessage">YAY! You made me the happiest person ever! 😍❤️</p>
+
+    <p class="footer">Made by your baby Rjay pogi ❤️</p>
+
+    <script>
+        let noClickCount = 0;
+        const messages = [
+            "Hala why 😢",
+            "Ayaw ah :(",
+            "PLS CLICK YESS YUNAA 💖",
+            "Ayaw mo ah ge. 🤨",
+            "Byebye 😈😈"
+        ];
+
+        document.getElementById("noButton").addEventListener("click", function() {
+            let yesButton = document.getElementById("yesButton");
+            let messageDisplay = document.getElementById("message");
+
+            // Make Yes button bigger
+            yesButton.style.fontSize = (parseInt(window.getComputedStyle(yesButton).fontSize) + 10) + "px";
+
+            // Change message
+            if (noClickCount < messages.length) {
+                messageDisplay.textContent = messages[noClickCount];
+            }
+
+            // Hide No button after 5 clicks
+            noClickCount++;
+            if (noClickCount >= 5) {
+                document.getElementById("noButton").style.display = "none";
+            }
+        });
+
+        document.getElementById("yesButton").addEventListener("click", function() {
+            startConfetti();
+            showEmojis();
+            
+            // Hide buttons
+            document.getElementById("buttons").style.display = "none";
+
+            // Show final image and message
+            document.getElementById("finalImage").style.display = "block";
+            document.getElementById("finalMessage").style.display = "block";
+        });
+
+        function startConfetti() {
+            const confettiColors = ["#ff4d6d", "#ffcc00", "#ff66b2", "#66ff66", "#3399ff"];
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.style.position = "fixed";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = "-20px";
+                confetti.style.width = "10px";
+                confetti.style.height = "10px";
+                confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.opacity = Math.random();
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+                
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function showEmojis() {
+            const emojis = ["😍", "🥰", "❤️", "🎊", "🎉"];
+            for (let i = 0; i < 30; i++) {
+                let emoji = document.createElement("div");
+                emoji.classList.add("emoji");
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * window.innerWidth + "px";
+                emoji.style.top = Math.random() * window.innerHeight + "px";
+                
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
